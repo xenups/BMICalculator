@@ -28,11 +28,11 @@ class BMICalculator {
 
   String getHealthStatus() {
     if (_bmi > 25) {
-      return ("You have OverWeight");
+      return ("You are OverWeight");
     } else if (_bmi >= 18.5 && _bmi < 25) {
-      return ("you have normal weight");
+      return ("You are Normal weight");
     } else {
-      return ("you have under weight");
+      return ("You are Under weight");
     }
   }
 
@@ -78,85 +78,177 @@ class _BMIResultState extends State<BMIResult> {
 
   @override
   Widget build(BuildContext context) {
-    print(_name + ' vazn ' + _weight + ' ghad' + _height);
     var bmi = BMICalculator(_height, _weight);
     var bmiNumber = bmi.calculate();
     String health = bmi.getHealthStatus();
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
-          
-          appBar: AppBar(title:Text('BMI Calculator'),actions: <Widget>[
-            IconButton(icon: Icon(Icons.home),onPressed: (){},color: Colors.white ,),
-          ],),
-            backgroundColor: Colors.teal,
-            body: new Container(
-              padding: const EdgeInsets.only(top: 50.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Hello',
-                      style:
-                          TextStyle(color: Colors.white, fontSize: 30.0),
-                      textAlign: TextAlign.center,
+            backgroundColor: Colors.white,
+            body: new Column(
+              children: <Widget>[
+                Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.indigo,
+                          spreadRadius: 2,
+                          blurRadius: 1,
+                          offset: Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
                     ),
-                  ),
-                  Text(
-                    _name,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.deepPurple,
-                        fontSize: 50.0),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Text(
-                    'your bmi is $bmiNumber',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 30.0),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Text(
-                    health,
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 30.0),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizedBox(width: 50.0, height: 100.0),
-                      RotateAnimatedTextKit(
-                          onTap: () {
-                            print("Tap Event");
-                          },
-                          text: [
-                            bmi.getAdvice()[0],
-                            bmi.getAdvice()[1],
-                            bmi.getAdvice()[2]
-                          ],
-                          textStyle:
-                              TextStyle(fontSize: 40.0, fontFamily: "Horizon"),
-                          textAlign: TextAlign.center,
-                          alignment: AlignmentDirectional
-                              .center // or Alignment.topLeft
+                    width: MediaQuery.of(context).size.width,
+                    height: 300.0,
+//              padding: const EdgeInsets.only(top: 50.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 25.0,),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Material(
+                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                color: Colors.indigo,
+                                child: IconButton(
+                                  padding: EdgeInsets.only(right: 16,left: 10),
+                                  icon: Icon(Icons.home,
+                                      color: Colors.white, size: 30),
+                                  onPressed: () {Navigator.pop(context);},
+                                ),
+                              ),
+                            ],
                           ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'Hello $_name !',
+                            softWrap: true,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            height: 45.0,
+                          ),
+                          Text(
+                            bmi.calculate(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 50.0,
+                                fontWeight: FontWeight.w800),
+                          ),
+                        ],
+                      ),
+                    )),
+                Container(
+                  margin: const EdgeInsets.only(top: 2.0,left: 15.0,right: 15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width - 10,
+                        height: MediaQuery.of(context).size.width - 50,
+                        child: Card(
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                  top: 20.0, bottom: 10.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 50.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Colors.red,
+                                        size: 30,
+                                      ),
+                                      Text(bmi.getHealthStatus(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600)),
+                                      SizedBox(width: 20),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 50.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.accessibility,
+                                        color: Colors.teal,
+                                        size: 30.0,
+                                      ),
+                                      Text(
+                                        'Your BMI is :' + bmi.calculate(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(width: 20),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.assessment,
+                                        color: Colors.deepPurple,
+                                        size: 30,
+                                      ),
+                                      ColorizeAnimatedTextKit(
+                                          text: [
+                                            bmi.getAdvice()[0],
+                                            bmi.getAdvice()[1],
+                                            bmi.getAdvice()[2],
+                                          ],
+                                          textStyle: TextStyle(
+                                            fontSize: 22.0,
+//                                              fontFamily: "Horizon"
+                                          ),
+                                          colors: [
+                                            Colors.black,
+                                            Colors.black26,
+                                            Colors.black45,
+                                            Colors.blueGrey,
+                                          ],
+                                          textAlign: TextAlign.center,
+                                          alignment: AlignmentDirectional
+                                              .center // or Alignment.topLeft
+                                          ),
+                                      SizedBox(width: 20),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          margin: const EdgeInsets.only(top: 20.0),
+                          elevation: 10.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0)),
+                        ),
+                      ),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             )));
   }
 }

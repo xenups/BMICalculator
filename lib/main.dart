@@ -36,20 +36,40 @@ class _FirstPageState extends State<FirstPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'BMI Calculator',
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                  fontSize: 30.0,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 15.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      Positioned(
+                        left: 1.0,
+                        top: 2.0,
+                        child: Icon(Icons.favorite, color: Colors.black54,size: 40.0),
+                      ),
+                      Icon(Icons.favorite, color: Colors.redAccent,size: 40.0,),
+                    ],
+                  ),
+
+                  SizedBox(
+                    width: 15.0,
+                  ),
+                  Text(
+                    'BMI Calculator',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      fontSize: 30.0,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 15.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Padding(
                 padding:
@@ -176,16 +196,24 @@ class _MyButtonState extends State<MyButton> {
       borderRadius: BorderRadius.circular(27.0),
       child: new MaterialButton(
           onPressed: () {
-            print(this.heightController.text);
-            print(this.weightController.text);
-            print(this.nameController.text);
-            Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) => new BMIResult(
-                        this.nameController.text,
-                        this.heightController.text,
-                        this.weightController.text)));
+            if (weightController.text != null ||
+                heightController.text != null ||
+                nameController.text != null) {
+              if (double.parse(heightController.text) < 1 ||
+                  double.parse(heightController.text) > 300 ||
+                  double.parse(weightController.text) < 1 ||
+                  double.parse(weightController.text) > 500) {
+                print('error');
+              } else {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new BMIResult(
+                            this.nameController.text,
+                            this.heightController.text,
+                            this.weightController.text)));
+              }
+            }
           },
           minWidth: 250.0,
           height: 45.0,
