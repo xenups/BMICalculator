@@ -84,9 +84,11 @@ class _BMIResultState extends State<BMIResult> {
     String health = bmi.getHealthStatus();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
+          
           appBar: AppBar(title:Text('BMI Calculator'),actions: <Widget>[
-            IconButton(icon: Icon(Icons.home),onPressed: (){},color: Colors.indigo ,),
+            IconButton(icon: Icon(Icons.home),onPressed: (){},color: Colors.white ,),
           ],),
             backgroundColor: Colors.teal,
             body: new Container(

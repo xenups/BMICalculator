@@ -8,7 +8,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'BMI Calculator', home: FirstPage());
+    return MaterialApp(
+      title: 'BMI Calculator',
+      home: FirstPage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
@@ -18,69 +22,114 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-
   final TextEditingController nameControl = new TextEditingController();
   final TextEditingController weightControl = new TextEditingController();
   final TextEditingController heightControl = new TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
+        backgroundColor: Colors.indigo,
         body: Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 50.0, right: 50.0, top: 10.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'name',
-                prefixIcon: Icon(Icons.person),
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'BMI Calculator',
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 15.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ],
+                ),
               ),
-              textAlign: TextAlign.left,
-              controller: nameControl,
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'weight',
-                prefixIcon: Icon(Icons.fastfood),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding: const EdgeInsets.only(
+                          left: 10.0, top: 8.0, bottom: 8.0),
+                      hintText: 'name',
+                      prefixIcon: Icon(Icons.person),
+                      focusedBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.white),
+                          borderRadius: new BorderRadius.circular(27.0)),
+                      enabledBorder: new UnderlineInputBorder(
+                          borderRadius: new BorderRadius.circular(27.0),
+                          borderSide: new BorderSide(color: Colors.black26))),
+                  textAlign: TextAlign.left,
+                  controller: nameControl,
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
-              textAlign: TextAlign.left,
-              controller: weightControl,
-              style: TextStyle(color: Colors.black),
-              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'height',
-                prefixIcon: Icon(Icons.assessment),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding: const EdgeInsets.only(
+                          left: 10.0, top: 8.0, bottom: 8.0),
+                      hintText: 'weight',
+                      prefixIcon: Icon(Icons.fastfood),
+                      focusedBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.white),
+                          borderRadius: new BorderRadius.circular(27.0)),
+                      enabledBorder: new UnderlineInputBorder(
+                          borderRadius: new BorderRadius.circular(27.0),
+                          borderSide: new BorderSide(color: Colors.black26))),
+                  textAlign: TextAlign.left,
+                  controller: weightControl,
+                  style: TextStyle(color: Colors.black),
+                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                ),
               ),
-              textAlign: TextAlign.left,
-              controller: heightControl,
-              style: TextStyle(color: Colors.black),
-              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-              keyboardType: TextInputType.number,
-            ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding: const EdgeInsets.only(
+                          left: 10.0, top: 8.0, bottom: 8.0),
+                      hintText: 'height',
+                      prefixIcon: Icon(Icons.assessment),
+                      focusedBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.white),
+                          borderRadius: new BorderRadius.circular(27.0)),
+                      enabledBorder: new UnderlineInputBorder(
+                          borderRadius: new BorderRadius.circular(27.0),
+                          borderSide: new BorderSide(color: Colors.black26))),
+                  textAlign: TextAlign.left,
+                  controller: heightControl,
+                  style: TextStyle(color: Colors.black),
+                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
+                child: MyButton(
+                    'Calculate', nameControl, heightControl, weightControl),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
-            child: MyButton(
-                'Calculate', nameControl, heightControl, weightControl),
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }
 
@@ -121,9 +170,9 @@ class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
     return new Material(
-      color: Colors.indigo,
+      color: Colors.redAccent,
       elevation: 3.0,
-      shadowColor: Colors.indigo,
+      shadowColor: Colors.redAccent,
       borderRadius: BorderRadius.circular(27.0),
       child: new MaterialButton(
           onPressed: () {
@@ -141,7 +190,7 @@ class _MyButtonState extends State<MyButton> {
           minWidth: 250.0,
           height: 45.0,
           elevation: 3.0,
-          splashColor: Colors.indigo,
+          splashColor: Colors.red,
           child: Text(
             '${widget.buttonName}',
             style: TextStyle(color: Colors.white, fontSize: 20.0),
