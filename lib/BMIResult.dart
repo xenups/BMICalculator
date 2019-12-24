@@ -88,168 +88,172 @@ class _BMIResultState extends State<BMIResult> {
         home: Scaffold(
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
-            body: new Column(
+            body:new ListView(
               children: <Widget>[
-                Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.indigo,
-                          spreadRadius: 2,
-                          blurRadius: 1,
-                          offset: Offset(0, 2), // changes position of shadow
+                new Column(
+                  children: <Widget>[
+                    Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.indigo,
+                              spreadRadius: 2,
+                              blurRadius: 1,
+                              offset: Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    height: 300.0,
+                        width: MediaQuery.of(context).size.width,
+                        height: 300.0,
 //              padding: const EdgeInsets.only(top: 50.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 25.0,),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 25.0,),
+                          child: Column(
                             children: <Widget>[
-                              Material(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                color: Colors.indigo,
-                                child: IconButton(
-                                  padding: EdgeInsets.only(right: 16,left: 10),
-                                  icon: Icon(Icons.home,
-                                      color: Colors.white, size: 30),
-                                  onPressed: () {Navigator.pop(context);},
-                                ),
+                              Row(
+                                children: <Widget>[
+                                  Material(
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    color: Colors.indigo,
+                                    child: IconButton(
+                                      padding: EdgeInsets.only(right: 16,left: 10),
+                                      icon: Icon(Icons.home,
+                                          color: Colors.white, size: 30),
+                                      onPressed: () {Navigator.pop(context);},
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Text(
+                                'Hello $_name !',
+                                softWrap: true,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                height: 45.0,
+                              ),
+                              Text(
+                                bmi.calculate(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 50.0,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            'Hello $_name !',
-                            softWrap: true,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40.0,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(
-                            height: 45.0,
-                          ),
-                          Text(
-                            bmi.calculate(),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 50.0,
-                                fontWeight: FontWeight.w800),
+                        )),
+                    Container(
+                      margin: const EdgeInsets.only(top: 2.0,left: 15.0,right: 15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: MediaQuery.of(context).size.width - 20,
+                            height:350,
+                            child: Card(
+                              child: Container(
+                                  margin: const EdgeInsets.only(
+                                      top: 20.0, bottom: 10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 50.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
+                                            size: 30,
+                                          ),
+                                          Text(bmi.getHealthStatus(),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w600)),
+                                          SizedBox(width: 20),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 50.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.accessibility,
+                                            color: Colors.teal,
+                                            size: 30.0,
+                                          ),
+                                          Text(
+                                            'Your BMI is :' + bmi.calculate(),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          SizedBox(width: 20),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 30.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.assessment,
+                                            color: Colors.deepPurple,
+                                            size: 30,
+                                          ),
+                                          ColorizeAnimatedTextKit(
+                                              text: [
+                                                bmi.getAdvice()[0],
+                                                bmi.getAdvice()[1],
+                                                bmi.getAdvice()[2],
+                                              ],
+                                              textStyle: TextStyle(
+                                                fontSize: 22.0,
+//                                              fontFamily: "Horizon"
+                                              ),
+                                              colors: [
+                                                Colors.black,
+                                                Colors.black26,
+                                                Colors.black45,
+                                                Colors.blueGrey,
+                                              ],
+                                              textAlign: TextAlign.center,
+                                              alignment: AlignmentDirectional
+                                                  .center // or Alignment.topLeft
+                                          ),
+                                          SizedBox(width: 20),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                              margin: const EdgeInsets.only(top: 20.0),
+                              elevation: 10.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0)),
+                            ),
                           ),
                         ],
                       ),
-                    )),
-                Container(
-                  margin: const EdgeInsets.only(top: 2.0,left: 15.0,right: 15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width - 10,
-                        height: MediaQuery.of(context).size.width - 50,
-                        child: Card(
-                          child: Container(
-                              margin: const EdgeInsets.only(
-                                  top: 20.0, bottom: 10.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 50.0,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.favorite,
-                                        color: Colors.red,
-                                        size: 30,
-                                      ),
-                                      Text(bmi.getHealthStatus(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600)),
-                                      SizedBox(width: 20),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 50.0,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.accessibility,
-                                        color: Colors.teal,
-                                        size: 30.0,
-                                      ),
-                                      Text(
-                                        'Your BMI is :' + bmi.calculate(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 20),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30.0,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.assessment,
-                                        color: Colors.deepPurple,
-                                        size: 30,
-                                      ),
-                                      ColorizeAnimatedTextKit(
-                                          text: [
-                                            bmi.getAdvice()[0],
-                                            bmi.getAdvice()[1],
-                                            bmi.getAdvice()[2],
-                                          ],
-                                          textStyle: TextStyle(
-                                            fontSize: 22.0,
-//                                              fontFamily: "Horizon"
-                                          ),
-                                          colors: [
-                                            Colors.black,
-                                            Colors.black26,
-                                            Colors.black45,
-                                            Colors.blueGrey,
-                                          ],
-                                          textAlign: TextAlign.center,
-                                          alignment: AlignmentDirectional
-                                              .center // or Alignment.topLeft
-                                          ),
-                                      SizedBox(width: 20),
-                                    ],
-                                  ),
-                                ],
-                              )),
-                          margin: const EdgeInsets.only(top: 20.0),
-                          elevation: 10.0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  ],
+                )
               ],
             )));
   }
