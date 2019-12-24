@@ -83,8 +83,10 @@ class _BMIResultState extends State<BMIResult> {
     String health = bmi.getHealthStatus();
 
     return MaterialApp(
+
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
             body: new Column(
               children: <Widget>[

@@ -2,6 +2,9 @@ import 'package:bmi_calculator/BMIResult.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'MyButton.dart';
+import 'MyInput.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -45,12 +48,16 @@ class _FirstPageState extends State<FirstPage> {
                       Positioned(
                         left: 1.0,
                         top: 2.0,
-                        child: Icon(Icons.favorite, color: Colors.black54,size: 40.0),
+                        child: Icon(Icons.favorite,
+                            color: Colors.black54, size: 40.0),
                       ),
-                      Icon(Icons.favorite, color: Colors.redAccent,size: 40.0,),
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.redAccent,
+                        size: 40.0,
+                      ),
                     ],
                   ),
-
                   SizedBox(
                     width: 15.0,
                   ),
@@ -74,72 +81,17 @@ class _FirstPageState extends State<FirstPage> {
               Padding(
                 padding:
                     const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding: const EdgeInsets.only(
-                          left: 10.0, top: 8.0, bottom: 8.0),
-                      hintText: 'name',
-                      prefixIcon: Icon(Icons.person),
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.white),
-                          borderRadius: new BorderRadius.circular(27.0)),
-                      enabledBorder: new UnderlineInputBorder(
-                          borderRadius: new BorderRadius.circular(27.0),
-                          borderSide: new BorderSide(color: Colors.black26))),
-                  textAlign: TextAlign.left,
-                  controller: nameControl,
-                  style: TextStyle(color: Colors.black),
-                ),
+                child: MyInput(nameControl,'name',Icon(Icons.person),false),
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding: const EdgeInsets.only(
-                          left: 10.0, top: 8.0, bottom: 8.0),
-                      hintText: 'weight',
-                      prefixIcon: Icon(Icons.fastfood),
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.white),
-                          borderRadius: new BorderRadius.circular(27.0)),
-                      enabledBorder: new UnderlineInputBorder(
-                          borderRadius: new BorderRadius.circular(27.0),
-                          borderSide: new BorderSide(color: Colors.black26))),
-                  textAlign: TextAlign.left,
-                  controller: weightControl,
-                  style: TextStyle(color: Colors.black),
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
-                ),
+                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 30.0),
+                child: MyInput(weightControl, 'weight',Icon(Icons.fastfood),true),
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 50.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding: const EdgeInsets.only(
-                          left: 10.0, top: 8.0, bottom: 8.0),
-                      hintText: 'height',
-                      prefixIcon: Icon(Icons.assessment),
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.white),
-                          borderRadius: new BorderRadius.circular(27.0)),
-                      enabledBorder: new UnderlineInputBorder(
-                          borderRadius: new BorderRadius.circular(27.0),
-                          borderSide: new BorderSide(color: Colors.black26))),
-                  textAlign: TextAlign.left,
-                  controller: heightControl,
-                  style: TextStyle(color: Colors.black),
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
-                ),
+                    const EdgeInsets.only(left: 50.0, right: 50.0, top: 30.0),
+                child:MyInput(heightControl, 'height',Icon(Icons.assessment),true),
               ),
               Padding(
                 padding:
@@ -153,76 +105,3 @@ class _FirstPageState extends State<FirstPage> {
   }
 }
 
-class MyButton extends StatefulWidget {
-  var nameController = new TextEditingController();
-  var heightController = new TextEditingController();
-  var weightController = new TextEditingController();
-
-  var buttonName = "";
-
-  MyButton(this.buttonName, this.nameController, this.heightController,
-      this.weightController);
-
-  @override
-  _MyButtonState createState() => _MyButtonState(
-      buttonName, nameController, heightController, weightController);
-}
-
-class _MyButtonState extends State<MyButton> {
-  var nameController = new TextEditingController();
-  var heightController = new TextEditingController();
-  var weightController = new TextEditingController();
-  var buttonName = "";
-
-  _MyButtonState(this.buttonName, this.nameController, this.heightController,
-      this.weightController);
-
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState(() {
-      nameController = this.nameController;
-      heightController = this.heightController;
-      weightController = this.weightController;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Material(
-      color: Colors.redAccent,
-      elevation: 3.0,
-      shadowColor: Colors.redAccent,
-      borderRadius: BorderRadius.circular(27.0),
-      child: new MaterialButton(
-          onPressed: () {
-            if (weightController.text != null ||
-                heightController.text != null ||
-                nameController.text != null) {
-              if (double.parse(heightController.text) < 1 ||
-                  double.parse(heightController.text) > 300 ||
-                  double.parse(weightController.text) < 1 ||
-                  double.parse(weightController.text) > 500) {
-                print('error');
-              } else {
-                Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new BMIResult(
-                            this.nameController.text,
-                            this.heightController.text,
-                            this.weightController.text)));
-              }
-            }
-          },
-          minWidth: 250.0,
-          height: 45.0,
-          elevation: 3.0,
-          splashColor: Colors.red,
-          child: Text(
-            '${widget.buttonName}',
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
-          )),
-    );
-  }
-}
